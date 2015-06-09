@@ -25,7 +25,6 @@ $app->post('/login', function() use ($app) {
     $response = array();
 
     // reading post params
-    $email = $app->request->post('email');
     $pass = $app->request->post('pass');
 
     if($pass == "success") {
@@ -41,49 +40,80 @@ $app->post('/login', function() use ($app) {
 });
 
 /**
- * User login
- * url - /login
- * method - POST
- * params - email, password
- */
-$app->get('/bills', function() use ($app) {
-    // check for required params
-    verifyRequiredParams(array('email', 'pass'));
-
-    $response = array();
-
-    // reading post params
-    $email = $app->request->post('email');
-    $pass = $app->request->post('pass');
-
-    if($pass == "success") {
-        $response["error"] = false;
-        $response["sessionId"] = "FakeSessionId";
-    } else {
-        $response["error"] = true;
-        $response["sessionId"] = null;
-    }
-
-    // echo json response
-    echoResponse(201, $response);
-});
-
-/**
- * Access a list of the challenges in a particular group
- * url - /challenges_in_group
+ * Return the list of the bills
+ * url - /bills
  * method - GET
  */
-$app->get('/bills', function() use ($app){
-    // check for required params
-    verifyRequiredParams(array('sessionId'));
-
-    $req = $app->request();
-    $sessionId = $req->get('sessionId');
+$app->get('/bills/:sessionId', function($sessionId) use ($app){
     $response = array();
 
-    $db = new DbHandler();
+    $bills = array();
 
-    $response["challenges"] = $db->getChallengesInGroup($group);
+    $tmp["StartDate"] = "2015-06-01";
+    $tmp["EndDate"] = "2015-06-07";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_01.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-06-08";
+    $tmp["EndDate"] = "2015-06-14";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_08.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-06-15";
+    $tmp["EndDate"] = "2015-06-21";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_15.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-06-22";
+    $tmp["EndDate"] = "2015-06-28";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_22.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-06-29";
+    $tmp["EndDate"] = "2015-07-05";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_29.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-07-06";
+    $tmp["EndDate"] = "2015-07-12";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_06.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-07-13";
+    $tmp["EndDate"] = "2015-07-19";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_13.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-07-20";
+    $tmp["EndDate"] = "2015-07-26";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_20.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-07-27";
+    $tmp["EndDate"] = "2015-08-02";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_27.pdf';
+    array_push($bills, $tmp);
+
+    $tmp["StartDate"] = "2015-08-03";
+    $tmp["EndDate"] = "2015-08-09";
+    $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_08_03.pdf';
+    array_push($bills, $tmp);
+
+    $response["bills"] = $bills;
+
+    echoResponse(200, $response);
+});
+
+/**
+ * Return information relevant to the current moment
+ */
+$app->get('/now/:sessionId', function($sessionId) use ($app){
+    $response = array();
+
+    $response["Spent"] = rand(100,300)/10;
+    $response["PriceNow"] = rand(1, 10);
+    $response["DaysLeft"] = rand(1, 6);
+    $response["AsOf"] = date("Y-m-d");
 
     echoResponse(200, $response);
 });
@@ -91,37 +121,6 @@ $app->get('/bills', function() use ($app){
 /**
  * ------------------------------------------------
  * Flick Api ends here
- * ------------------------------------------------
- */
-
-/**
- * ------------------------------------------------
- * Hop Balance Reporting API starts here
- * ------------------------------------------------
- */
-$app->post('/access', function() use ($app) {
-    // check for required params
-    verifyRequiredParams(array('email', 'channel', 'success'));
-
-    // reading post params
-    $email = $app->request->post('email');
-    $channel = $app->request->post('channel');
-    $success = $app->request->post('success') === "true" ? 1 : 0;
-
-    //verify channel
-    if($channel !== "iPhone" && $channel !== "Android" && $channel !== "iPad"){
-        echo "invalid channel";
-        return;
-    }
-
-    $db = new DbHandler();
-    $db->updateLog($email, $channel, $success);
-});
-
-
-/**
- * ------------------------------------------------
- * Hop Balance Reporting API ends here
  * ------------------------------------------------
  */
 
