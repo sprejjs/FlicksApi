@@ -51,51 +51,61 @@ $app->get('/bills/:sessionId', function($sessionId) use ($app){
 
     $tmp["StartDate"] = "2015-06-01";
     $tmp["EndDate"] = "2015-06-07";
+    $tmp["Amount"] = "$12.26";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_01.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-06-08";
     $tmp["EndDate"] = "2015-06-14";
+    $tmp["Amount"] = "$34.06";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_08.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-06-15";
     $tmp["EndDate"] = "2015-06-21";
+    $tmp["Amount"] = "$28.12";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_15.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-06-22";
     $tmp["EndDate"] = "2015-06-28";
+    $tmp["Amount"] = "$29.19";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_22.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-06-29";
     $tmp["EndDate"] = "2015-07-05";
+    $tmp["Amount"] = "$20.46";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_06_29.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-07-06";
     $tmp["EndDate"] = "2015-07-12";
+    $tmp["Amount"] = "$15.12";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_06.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-07-13";
     $tmp["EndDate"] = "2015-07-19";
+    $tmp["Amount"] = "$19.44";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_13.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-07-20";
     $tmp["EndDate"] = "2015-07-26";
+    $tmp["Amount"] = "$23.56";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_20.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-07-27";
     $tmp["EndDate"] = "2015-08-02";
+    $tmp["Amount"] = "$28.32";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_07_27.pdf';
     array_push($bills, $tmp);
 
     $tmp["StartDate"] = "2015-08-03";
     $tmp["EndDate"] = "2015-08-09";
+    $tmp["Amount"] = "$19.19";
     $tmp["Url"] = 'bills/url/asdfwebao2124baadf231/bill_08_03.pdf';
     array_push($bills, $tmp);
 
