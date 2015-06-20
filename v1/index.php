@@ -20,14 +20,47 @@ $app = new \Slim\Slim();
  */
 $app->post('/login', function() use ($app) {
     // check for required params
-    verifyRequiredParams(array('email', 'pass'));
+    verifyRequiredParams(array('email', 'pass', 'remember'));
 
     $response = array();
 
     // reading post params
+    $remember = $app->request->post('remember');
     $pass = $app->request->post('pass');
 
     if($pass == "success") {
+        $response["error"] = false;
+        $response["sessionId"] = "FakeSessionId";
+
+        if($remember == "true") {
+            $response["authKey"] = "FakeAuthKey";
+        }
+
+    } else {
+        $response["error"] = true;
+        $response["sessionId"] = null;
+    }
+
+    // echo json response
+    echoResponse(201, $response);
+});
+
+/**
+ * User login
+ * url - /login
+ * method - POST
+ * params - email, password
+ */
+$app->post('/rememberLogin', function() use ($app) {
+    // check for required params
+    verifyRequiredParams(array('authKey'));
+
+    $response = array();
+
+    // reading post params
+    $authKey = $app->request->post('authKey');
+
+    if($authKey == "FakeAuthKey") {
         $response["error"] = false;
         $response["sessionId"] = "FakeSessionId";
     } else {
